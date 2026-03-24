@@ -1,0 +1,15 @@
+*.tiff
+*.jpg
+*.png
+*/temp_s/
+*/temp_s_2/
+*/temp_s_3/
+*/data_test/
+*/cleaned_masks/
+*/cleaned_masks_2/
+*/cleaned_masks_3/
+*/binned_images/
+
+
+*.log
+__pycache__/
