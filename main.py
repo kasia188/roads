@@ -38,10 +38,21 @@ def main():
         mask = np.zeros_like(s_binned, dtype=np.uint8)
         mask[s_binned < 20] = 255
         masks.append(mask)
-
-    clean_mask(masks, size_1=500, size_2=3000, disk_size=2, out_folder="cleaned_masks_3")
+        
+        cleaned_masks = clean_mask(masks, size_1=500, size_2=3000, disk_size=2, out_folder="cleaned_masks_3")
+    
     logger.info("Masks cleaned.")
 
-    
+    length_file = Path("length_roads.txt")
+    with length_file.open("w") as f:
+        for i, mask in enumerate(cleaned_masks):
+            mask_path = Path("cleaned_masks_3") / f"mask_cleaned_{i}.png"
+            tif_path = rgb_paths[i]
+            try:
+                length_m = road_length(mask_path, tif_path)
+                f.write(f"{mask_path.name} - road length: {length_m:.2f} m")
+            except Exception as e:
+                logger.error(f"Error processing {mask_path.name}: {e}")
+
 if __name__ == "__main__":
     main()

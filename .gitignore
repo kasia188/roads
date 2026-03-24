@@ -9,6 +9,7 @@
 */cleaned_masks_2/
 */cleaned_masks_3/
 */binned_images/
+*.txt
 
 
 *.log
